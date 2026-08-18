@@ -1,6 +1,15 @@
 {
-  "originHash" : "791a94cb35528f6e4fb9613eac608c3af31214805bc236d7c21819b7a6f8ef06",
+  "originHash" : "dc73d645dba64b3999b86bd2f5cd6611359629b7e1b5ce94d63564ae1b946cb1",
   "pins" : [
+    {
+      "identity" : "algebra-package",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/zplot/algebra-package.git",
+      "state" : {
+        "revision" : "89ffc637313389231c008f4a58985f6b3a166476",
+        "version" : "1.0.0"
+      }
+    },
     {
       "identity" : "async-http-client",
       "kind" : "remoteSourceControl",
