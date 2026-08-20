@@ -27,4 +27,27 @@ func routes(_ app: Application) throws {
             .joined(separator: " · ")
         return "\(n) = \(factors)"
     }
+
+    app.get("factorize") { req async throws in
+        try await req.view.render("factorize", ["title": "Factorizar un entero"])
+    }
+
+    struct FactorizeForm: Content {
+        let n: Int
+    }
+
+    app.post("factorize") { req async throws -> View in
+        let form = try req.content.decode(FactorizeForm.self)
+        guard form.n >= 1 else {
+            throw Abort(.badRequest, reason: "n debe ser un entero positivo")
+        }
+        let result = integerFactorization(form.n)
+            .map { "\($0.0)^\($0.1)" }
+            .joined(separator: " · ")
+        return try await req.view.render("factorize", [
+            "title": "Factorizar un entero",
+            "n": "\(form.n)",
+            "result": result,
+        ])
+    }
 }
