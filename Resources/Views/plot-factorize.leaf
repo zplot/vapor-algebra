@@ -1,34 +1,33 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <title>#(title)</title>
-  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
-</head>
-<body>
-  <h1>#(title)</h1>
-  <p>Descomposición en primos de <strong>#(n)</strong>.</p>
+#extend("base"):
+  #export("body"):
+    <section class="prose prose-invert max-w-none">
+      <h1>#(title)</h1>
+      <p>Descomposición en primos de <strong>#(n)</strong> representada como diagrama de barras.</p>
+    </section>
 
-  <div id="chart" style="width:100%;max-width:800px;height:500px;"></div>
+    <div id="chart" class="mt-6 h-[500px] rounded-lg border border-slate-800 bg-slate-900/40 p-2"></div>
 
-  <script id="chart-data" type="application/json">
-    {"primes": #(primes), "exponents": #(exponents)}
-  </script>
-
-  <script>
-    const data = JSON.parse(document.getElementById('chart-data').textContent);
-    Plotly.newPlot('chart', [{
-      x: data.primes.map(String),
-      y: data.exponents,
-      type: 'bar',
-      marker: { color: '#4C78A8' },
-      text: data.exponents.map(e => e.toString()),
-      textposition: 'outside',
-    }], {
-      xaxis: { title: 'Primo', type: 'category' },
-      yaxis: { title: 'Exponente', dtick: 1 },
-      margin: { t: 20 },
-    }, { responsive: true });
-  </script>
-</body>
-</html>
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <script id="chart-data" type="application/json">
+      {"primes": #(primes), "exponents": #(exponents)}
+    </script>
+    <script>
+      const data = JSON.parse(document.getElementById('chart-data').textContent);
+      Plotly.newPlot('chart', [{
+        x: data.primes.map(String),
+        y: data.exponents,
+        type: 'bar',
+        marker: { color: '#818cf8' },
+        text: data.exponents.map(e => e.toString()),
+        textposition: 'outside',
+      }], {
+        paper_bgcolor: 'transparent',
+        plot_bgcolor: 'transparent',
+        font: { color: '#e2e8f0' },
+        xaxis: { title: 'Primo', type: 'category', gridcolor: '#334155' },
+        yaxis: { title: 'Exponente', dtick: 1, gridcolor: '#334155' },
+        margin: { t: 20 },
+      }, { responsive: true });
+    </script>
+  #endexport
+#endextend

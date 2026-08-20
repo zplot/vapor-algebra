@@ -1,12 +1,23 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
+#extend("base"):
+  #export("body"):
+    <section class="prose prose-invert max-w-none">
+      <h1>Álgebra en la web</h1>
+      <p class="lead">Aplicación en Vapor que expone utilidades de <code>AlgebraPackage</code> a través del navegador. Incluye visualizaciones interactivas y renderizado LaTeX.</p>
+    </section>
 
-  <title>#(title)</title>
-</head>
-
-<body>
-  <h1>#(title)</h1>
-</body>
-</html>
+    <div class="mt-8 grid gap-4 sm:grid-cols-2">
+      <a href="/factorize" class="group rounded-lg border border-slate-800 bg-slate-900/50 p-5 transition hover:border-slate-600 hover:bg-slate-900">
+        <h3 class="font-medium text-white">Factorizar un entero</h3>
+        <p class="mt-1 text-sm text-slate-400">Descomposición en primos $n = \prod p_i^{e_i}$.</p>
+      </a>
+      <a href="/plot/factorize/360" class="group rounded-lg border border-slate-800 bg-slate-900/50 p-5 transition hover:border-slate-600 hover:bg-slate-900">
+        <h3 class="font-medium text-white">Gráfico 2D</h3>
+        <p class="mt-1 text-sm text-slate-400">Factorización de 360 representada en barras.</p>
+      </a>
+      <a href="/plot/surface" class="group rounded-lg border border-slate-800 bg-slate-900/50 p-5 transition hover:border-slate-600 hover:bg-slate-900 sm:col-span-2">
+        <h3 class="font-medium text-white">Superficie 3D</h3>
+        <p class="mt-1 text-sm text-slate-400">$z = x^2 - y^2$ visualizada como silla de montar.</p>
+      </a>
+    </div>
+  #endexport
+#endextend

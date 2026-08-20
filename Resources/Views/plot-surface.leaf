@@ -1,40 +1,40 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <title>#(title)</title>
-  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
-</head>
-<body>
-  <h1>#(title)</h1>
-  <p>Puedes rotar la superficie arrastrando con el ratón y ampliarla con la rueda.</p>
+#extend("base"):
+  #export("body"):
+    <section class="prose prose-invert max-w-none">
+      <h1>Superficie 3D</h1>
+      <p>Silla de montar $z = x^2 - y^2$ sobre $[-3, 3]^2$. Puedes rotar arrastrando con el ratón y ampliar con la rueda.</p>
+    </section>
 
-  <div id="chart" style="width:100%;max-width:900px;height:600px;"></div>
+    <div id="chart" class="mt-6 h-[600px] rounded-lg border border-slate-800 bg-slate-900/40 p-2"></div>
 
-  <script id="chart-data" type="application/json">
-    {"x": #(x), "y": #(y), "z": #(z)}
-  </script>
-
-  <script>
-    const data = JSON.parse(document.getElementById('chart-data').textContent);
-    Plotly.newPlot('chart', [{
-      type: 'surface',
-      x: data.x,
-      y: data.y,
-      z: data.z,
-      colorscale: 'Viridis',
-      contours: {
-        z: { show: true, usecolormap: true, project: { z: true } }
-      }
-    }], {
-      scene: {
-        xaxis: { title: 'x' },
-        yaxis: { title: 'y' },
-        zaxis: { title: 'z' },
-        camera: { eye: { x: 1.5, y: 1.5, z: 1.2 } }
-      },
-      margin: { l: 0, r: 0, t: 20, b: 0 }
-    }, { responsive: true });
-  </script>
-</body>
-</html>
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <script id="chart-data" type="application/json">
+      {"x": #(x), "y": #(y), "z": #(z)}
+    </script>
+    <script>
+      const data = JSON.parse(document.getElementById('chart-data').textContent);
+      Plotly.newPlot('chart', [{
+        type: 'surface',
+        x: data.x,
+        y: data.y,
+        z: data.z,
+        colorscale: 'Viridis',
+        contours: {
+          z: { show: true, usecolormap: true, project: { z: true } }
+        }
+      }], {
+        paper_bgcolor: 'transparent',
+        plot_bgcolor: 'transparent',
+        font: { color: '#e2e8f0' },
+        scene: {
+          xaxis: { title: 'x', color: '#94a3b8', gridcolor: '#334155' },
+          yaxis: { title: 'y', color: '#94a3b8', gridcolor: '#334155' },
+          zaxis: { title: 'z', color: '#94a3b8', gridcolor: '#334155' },
+          camera: { eye: { x: 1.5, y: 1.5, z: 1.2 } },
+          bgcolor: 'transparent'
+        },
+        margin: { l: 0, r: 0, t: 20, b: 0 }
+      }, { responsive: true });
+    </script>
+  #endexport
+#endextend

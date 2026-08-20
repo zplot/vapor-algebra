@@ -1,21 +1,30 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <title>#(title)</title>
-</head>
-<body>
-  <h1>#(title)</h1>
+#extend("base"):
+  #export("body"):
+    <section class="prose prose-invert max-w-none">
+      <h1>#(title)</h1>
+      <p>Introduce un entero positivo $n$ y calcularé su factorización en primos: $n = p_1^{e_1} \cdot p_2^{e_2} \cdots p_k^{e_k}$.</p>
+    </section>
 
-  <form action="/factorize" method="post">
-    <label for="n">Número entero positivo:</label>
-    <input type="number" id="n" name="n" min="1" required value="#(n)">
-    <button type="submit">Factorizar</button>
-  </form>
+    <form action="/factorize" method="post" class="mt-6 flex flex-wrap items-end gap-3">
+      <div class="max-w-xs flex-1">
+        <label for="n" class="mb-1 block text-sm text-slate-300">Número entero positivo</label>
+        <input type="number" id="n" name="n" min="1" required value="#(n)"
+               class="w-full rounded-md border border-slate-700 bg-slate-900 px-3 py-2 text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500">
+      </div>
+      <button type="submit"
+              class="rounded-md bg-indigo-500 px-4 py-2 font-medium text-white shadow transition hover:bg-indigo-400">
+        Factorizar
+      </button>
+    </form>
 
-  #if(result):
-    <h2>Resultado</h2>
-    <p>#(n) = #(result)</p>
-  #endif
-</body>
-</html>
+    #if(result):
+      <div class="mt-8 rounded-lg border border-slate-800 bg-slate-900/60 p-6">
+        <h2 class="text-lg font-semibold text-white">Resultado</h2>
+        <p class="mt-2 font-mono text-slate-200">
+          <span class="text-slate-400">#(n) =</span>
+          <span class="text-emerald-400">#(result)</span>
+        </p>
+      </div>
+    #endif
+  #endexport
+#endextend
