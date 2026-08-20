@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>#(title)</title>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+</head>
+<body>
+  <h1>#(title)</h1>
+  <p>Puedes rotar la superficie arrastrando con el ratón y ampliarla con la rueda.</p>
+
+  <div id="chart" style="width:100%;max-width:900px;height:600px;"></div>
+
+  <script id="chart-data" type="application/json">
+    {"x": #(x), "y": #(y), "z": #(z)}
+  </script>
+
+  <script>
+    const data = JSON.parse(document.getElementById('chart-data').textContent);
+    Plotly.newPlot('chart', [{
+      type: 'surface',
+      x: data.x,
+      y: data.y,
+      z: data.z,
+      colorscale: 'Viridis',
+      contours: {
+        z: { show: true, usecolormap: true, project: { z: true } }
+      }
+    }], {
+      scene: {
+        xaxis: { title: 'x' },
+        yaxis: { title: 'y' },
+        zaxis: { title: 'z' },
+        camera: { eye: { x: 1.5, y: 1.5, z: 1.2 } }
+      },
+      margin: { l: 0, r: 0, t: 20, b: 0 }
+    }, { responsive: true });
+  </script>
+</body>
+</html>
